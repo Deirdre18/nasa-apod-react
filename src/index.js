@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-// eslint-disable-next-line
+
 const API_KEY =`${process.env.REACT_APP_API_KEY_YT}`;
+console.log("API", API_KEY);
 
 ReactDOM.render(
   <React.StrictMode>

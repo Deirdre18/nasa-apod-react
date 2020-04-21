@@ -29,7 +29,6 @@ class App extends Component {
     .then(photoData => this.setState({ photo: photoData }));
   };
 
-
   render() {
     return (
       <div>
