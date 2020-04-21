@@ -10,7 +10,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch(`https://api.nasa.gov/planetary/apod?api_key=$DEMO_KEY`)
+    fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_API_KEY_YT}`)
 
     .then(response => response.json())
     .then(json => this.setState({ photo: json }));
@@ -24,7 +24,7 @@ class App extends Component {
   };
 
   getPhoto = date => {
-    fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=$.env/DEMO_KEY`)
+    fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${process.env.REACT_APP_API_KEY_YT}`)
     .then(response => response.json())
     .then(photoData => this.setState({ photo: photoData }));
   };
