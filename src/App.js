@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-// eslint-disable-next-line
 import DateInput from "./components/DateInput";
 import Photo from "./components/Photo.js";
-import DatePicker from "react-datepicker";
+import moment from "moment";
 
-import "react-datepicker/dist/react-datepicker.css";
+
 class App extends Component {
 
   state = {
-    date: "",
-    photo: ""
+    date:moment(),
+    photo:""
   };
 
   componentDidMount() {
@@ -19,18 +18,17 @@ class App extends Component {
     .then(json => this.setState({ photo: json }));
   }
 
-  changeDate = e => {
-    e.preventDefault();
-    let dateFromInput = e.target[0].value;
-    this.setState({ date: dateFromInput });
-    this.getPhoto(dateFromInput);
-  };
+  formatDate = moment => {
+   let year = moment.year();
+   let month = moment.month() + 1;
+   let day = moment.date();
+   return `${year}-${month}-${day}`;
+   }
 
-  handleChange = date => {
-    this.setState({
-      startDate: date
-    });
-  };
+  changeDate = dateFromInput => {
+        this.setState({ date: dateFromInput });
+        this.getPhoto(this.formatDate(dateFromInput));
+       };
 
   getPhoto = date => {
     fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${process.env.REACT_APP_API_KEY_YT}`)
@@ -40,14 +38,12 @@ class App extends Component {
 
   render() {
     return (
-
-
       <div>
         <h1>NASA's Astronomy Picture of the Day</h1>
-          <DatePicker
-            selected={this.state.startDate}
-            onChange={this.handleChange}
-          />
+          <DateInput
+              changeDate={this.changeDate}
+              date={this.state.date}
+            />
         <Photo photo={this.state.photo} />
       </div>
     );
