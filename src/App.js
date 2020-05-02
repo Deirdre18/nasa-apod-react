@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DateInput from "./components/DateInput";
 import Photo from "./components/Photo.js";
 import moment from "moment";
+import momentRandom from "moment-random";
 
 
 class App extends Component {
@@ -36,6 +37,12 @@ class App extends Component {
     .then(photoData => this.setState({ photo: photoData }));
   };
 
+  handleClick = () => {
+      let randomDate = momentRandom(moment(), moment("06-16-1995", "MM-DD-YYYY"));
+      this.setState({ date: randomDate });
+      this.getPhoto(this.formatDate(randomDate))
+  };
+
   render() {
     return (
       <div>
@@ -43,8 +50,10 @@ class App extends Component {
           <DateInput
               changeDate={this.changeDate}
               date={this.state.date}
-            />
-        <Photo photo={this.state.photo} />
+              handleClick={this.handleClick}
+        />
+          <Photo photo={this.state.photo} />
+
       </div>
     );
   }
