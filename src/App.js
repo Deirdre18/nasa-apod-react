@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DateInput from "./components/DateInput";
+import DateInput from "./components/DateInput.js";
 import Photo from "./components/Photo.js";
 import moment from "moment";
 import momentRandom from "moment-random";
